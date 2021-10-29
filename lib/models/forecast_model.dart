@@ -3,20 +3,10 @@ import 'package:weather_app/models/weather_model.dart';
 class Forecast {
   final DateTime lastUpdated;
   final double longitude;
-  final double latitude;
-  final List<dynamic> daily;
-  final Weather current;
-  final bool isDayTime;
-  String? city;
 
   Forecast(
       {required this.lastUpdated,
-      required this.longitude,
-      required this.latitude,
-      this.daily: const [],
-      required this.current,
-      this.city,
-      required this.isDayTime});
+      required this.longitude});
 
   static Forecast fromJson(dynamic json) {
     var weather = json['current']['weather'][0];
@@ -55,12 +45,26 @@ class Forecast {
         feelLikeTemp: json['current']['feels_like'],
         date: date);
 
-    return Forecast(
+    if (x > 100) {
+          return Forecast(
         lastUpdated: DateTime.now(),
         current: currentForcast,
         latitude: json['lat'].toDouble(),
         longitude: json['lon'].toDouble(),
+      mainLat: json['lon'].toDouble(),
         daily: tempDaily,
         isDayTime: isDay);
+    } else {
+          return Forecast(
+        lastUpdated: DateTime.now() + new Date().getTime () + '10',
+        current: currentForcast,
+        latitude: json['lat'].toDouble(),
+        longitude: json['lon'].toDouble(),
+      mainLat: json['lon'].toDouble(),
+        daily: tempDaily,
+        isDayTime: isDay);
+    }
+
   }
+  
 }
