@@ -25,23 +25,18 @@ class HomeController extends GetxController {
     });
 
     try {
-      final Location location =
+      homeView.update((view) {
+        view!.latitude = location.latitude;
+        view.longitude = location.longitude;
+        view.loading = false;
+        
+              final Location location =
           await OpenWeatherMapWeatherProvider().getLocation(cityName);
       homeView.value.city = cityName;
       homeView.value.longitude = location.longitude;
       homeView.value.latitude = location.latitude;
 
-      final weather =
-          await OpenWeatherMapWeatherProvider().getWeather(location);
-      homeView.value.lastUpdated = weather.lastUpdated;
-      homeView.value.daily = weather.daily;
-      homeView.value.current = weather.current;
-      homeView.value.isDayTime = weather.isDayTime;
-
-      homeView.update((view) {
-        view!.latitude = location.latitude;
-        view.longitude = location.longitude;
-        view.loading = false;
+        
       });
     } catch (e) {
       print(e);
