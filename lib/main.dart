@@ -23,6 +23,16 @@ class MyApp extends StatelessWidget {
           page: () => HomePage(),
           binding: HomePageBinding(),
         ),
+                GetPage(
+          name: '/logout',
+          page: () => LogoutPage(),
+          binding: LogoutPageBinding(),
+        ),
+        GetPage(
+          name: '/splash-screen',
+          page: () => SplashScreen(),
+          binding: SplashPageBinding(),
+        ),
       ],
     );
   }
